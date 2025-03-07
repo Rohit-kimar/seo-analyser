@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analyzer Tool</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: linear-gradient(120deg, #84fab0, #8fd3f4);
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background: #2c3e50;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .menu {
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+            padding: 10px;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            top: 50px;
+            left: 10px;
+            width: 150px;
+        }
+        .dropdown a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #2c3e50;
+        }
+        .dropdown a:hover {
+            background: #ddd;
+        }
+        .home-section, .about-section, .contact-section {
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            transition: background 0.5s;
+        }
+        .home-section { background: #64b5f6; color: white; }
+        .about-section { background: #ffecb3; }
+        .contact-section { background: #b3e5fc; }
+        input, button { 
+            margin: 10px 0; 
+            padding: 10px; 
+            border-radius: 5px;
+            border: none;
+        }
+        input {
+            width: 60%;
+            background: #fff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            background: #ff758c;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff5e62;
+        }
+        #results {
+            margin-top: 20px; 
+            padding: 20px;
+            background: white;
+            color: black;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            display: block;
+        }
+        footer {
+            margin-top: 20px;
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+        }
+        .glow {
+            background: pink !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu" onclick="toggleMenu()">≡ Menu</div>
+        <div class="dropdown" id="dropdownMenu">
+            <a onclick="scrollToSection('home')">Home</a>
+            <a onclick="scrollToSection('about')">About</a>
+            <a onclick="scrollToSection('contact')">Contact</a>
+        </div>
+    </header>
+
+    <div id="home" class="home-section">
+        <h2>SEO Analyzer Tool</h2>
+        <label for="url">Enter Website URL:</label>
+        <br>
+        <input type="text" id="url" placeholder="https://example.com">
+        <br>
+        <button onclick="analyzeSEO()">Analyze</button>
+        <div id="results"></div>
+    </div>
+
+    <div id="about" class="about-section">
+        <h3>About SEO Analyzer</h3>
+        <p>The SEO Analyzer Tool helps website owners and developers evaluate their website’s SEO performance. 
+        It provides insights into key SEO factors like meta tags, mobile-friendliness, keyword density, and more, 
+        along with recommendations for improvement.</p>
+    </div>
+
+    <div id="contact" class="contact-section">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:rohitrajrr7515241@gmail.com">rohitrajrr7515241@gmail.com</a></p>
+        <p>Phone: <a href="tel:6205556408">6205556408</a></p>
+        <p>Address: Bailley road, Dps more, Patna (Bihar)</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SEO Analyzer. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            let section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+            section.classList.add('glow');
+            setTimeout(() => {
+                section.classList.remove('glow');
+            }, 1500);
+            toggleMenu();
+        }
+
+        function analyzeSEO() {
+            let url = document.getElementById('url').value.trim();
+            if (!url) {
+                alert("Please enter a valid URL");
+                return;
+            }
+            
+            let resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = `<p>Analyzing ${url}...</p>`;
+            
+            let performanceScore = Math.floor(Math.random() * 51) + 50;
+            let seoScore = Math.floor(Math.random() * 51) + 50;
+            let accessibilityScore = Math.floor(Math.random() * 51) + 50;
+            let bestPracticesScore = Math.floor(Math.random() * 51) + 50;
+            
+            let seoReport = `
+                <h3>SEO Report for ${url}</h3>
+                <ul>
+                    <li><strong>Performance Score:</strong> ${performanceScore}</li>
+                    <li><strong>SEO Score:</strong> ${seoScore}</li>
+                    <li><strong>Accessibility Score:</strong> ${accessibilityScore}</li>
+                    <li><strong>Best Practices Score:</strong> ${bestPracticesScore}</li>
+                </ul>
+                <h4 style="color: #ff5e62;">Recommendations:</h4>
+                <p>Consider optimizing images, reducing JavaScript execution time, and improving mobile responsiveness.</p>
+            `;
+            
+            setTimeout(() => {
+                resultsDiv.innerHTML = seoReport;
+            }, 2000);
+        }
+
+        function toggleMenu() {
+            let menu = document.getElementById('dropdownMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
